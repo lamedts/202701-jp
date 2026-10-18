@@ -39,6 +39,32 @@ main{padding-bottom:72px}.section{padding-top:80px}.section-title{display:flex;g
 .summary-stay span{font-size:11px;letter-spacing:.09em;color:#577988;font-weight:900}
 @media(max-width:620px){.quick-summary{padding-top:38px}.summary-table thead{display:none}.summary-table,.summary-table tbody{display:block}.summary-table tr{display:grid;grid-template-columns:1fr auto;padding:14px 15px;border-bottom:1px solid #e7eff1;column-gap:14px;row-gap:4px}.summary-table tbody tr:last-child{border-bottom:0}.summary-table td{border:0;padding:0!important;width:auto!important;white-space:normal!important}.summary-table td:first-child{grid-column:1;grid-row:1;font-size:13px}.summary-table td:nth-child(2){grid-column:1 / -1;grid-row:2;font-size:13px}.summary-table td:last-child{grid-column:2;grid-row:1;font-size:12px;text-align:right}.summary-table td:last-child:before{content:'住宿：';color:#69818e;font-weight:500}.summary-stay{padding:15px 16px;font-size:12px;gap:5px}}
 @media print{.quick-summary{padding-top:12px}.summary-table-panel{box-shadow:none;border:1px solid #aaa}.summary-table{font-size:9pt}.summary-table th,.summary-table td{padding:7px 11px}.summary-stay{padding:10px 11px;background:#fff}.summary-table tbody tr:hover{background:transparent}}
+
+/* Destination photographs: quiet travel-journal frames within each day. */
+.day-gallery{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin:0 22px 16px}
+.day-gallery-pair{grid-template-columns:repeat(2,minmax(0,1fr))}
+.day-photo{min-width:0;margin:0}
+.day-photo-link{display:block;position:relative;overflow:hidden;aspect-ratio:16/8.5;border-radius:10px;background:#e8eff1;color:var(--muted);text-decoration:none}
+.day-photo-link img[hidden]{display:none}
+.day-photo-link img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .35s ease}
+.day-gallery-pair .day-photo-link{aspect-ratio:4/3}
+.day-photo-link:hover img{transform:scale(1.035)}
+.day-photo figcaption{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-top:7px;font-size:11px;line-height:1.6;color:#4c6d7e}
+.day-photo figcaption>span{font-weight:750}
+.day-photo figcaption>a{flex-shrink:0;color:#718793;font-size:10px;text-underline-offset:3px}
+.photo-unavailable{display:none;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:16px;font-size:12px;line-height:1.8}
+.day-photo-link.is-unavailable .photo-unavailable{display:flex}
+.photo-note{margin:22px 0 10px;color:var(--muted);font-size:11px;line-height:1.8}
+.photo-credits{border-top:1px solid var(--edge);padding:12px 0;color:var(--muted);font-size:11px;line-height:1.8}
+.photo-credits summary{width:fit-content;cursor:pointer;font-weight:750;color:#507184}
+.photo-credits ul{list-style:none;margin:12px 0 0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px 24px}
+.photo-credits li{display:flex;gap:10px;min-width:0;overflow-wrap:anywhere}
+.photo-credits li>span{flex-shrink:0;font-size:10px;letter-spacing:.08em;color:#39768a;padding-top:1px}
+.photo-credits a{text-underline-offset:3px}
+.photo-credits p{margin:10px 0 0}
+@media(max-width:620px){.day-gallery{margin:0 16px 16px;gap:10px}.day-photo figcaption{flex-wrap:wrap;gap:1px 6px}.day-gallery-pair .day-photo figcaption>span{flex-basis:100%}.photo-credits ul{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.day-photo-link img{transition:none}.day-photo-link:hover img{transform:none}}
+@media print{.day-gallery{margin:0 14px 10px;gap:8px}.day-photo-link,.day-gallery-pair .day-photo-link{aspect-ratio:auto;height:90px}.day-photo figcaption{font-size:8pt}.day-photo figcaption>a,.photo-note,.photo-credits{display:none}.day-photo-link:hover img{transform:none}}
 </style>
 </head>
 <body>
@@ -110,6 +136,10 @@ main{padding-bottom:72px}.section{padding-top:80px}.section-title{display:flex;g
 <section class="section" id="days"><div class="section-title"><div><span class="eyebrow muted">03 / DAILY ITINERARY</span><h2>每日行程・9日8夜。</h2></div><p>航班及點燈團時間已固定列出；其他車程同每日時段屬規劃，正式班次及酒店預訂後再微調。</p></div><div class="days-controls" role="group" aria-label="篩選每日行程"><button class="filter-btn" data-filter="all" aria-pressed="true">全部 9 日</button><button class="filter-btn" data-filter="snow" aria-pressed="false">❄ 雪景重點</button><button class="filter-btn" data-filter="culture" aria-pressed="false">⛩ 古街文化</button><button class="filter-btn" data-filter="city" aria-pressed="false">🍜 大阪城市</button></div><div class="day-grid" id="dayGrid"><article class="day-card" data-tags="city" id="day-1" aria-label="第1日 1月15日">
       <div class="day-card-top"><div class="date-stack"><span class="day-count">DAY 01</span><span class="date-label">1月15日 <small>2027・星期五</small></span></div><span class="kind">✈ 抵達日</span></div>
       <div class="day-card-main"><h3>抵達大阪・輕鬆開場</h3><p class="where">大阪</p></div>
+      <div class="day-gallery" aria-label="當日景點相片"><figure class="day-photo">
+        <a class="day-photo-link" href="https://upload.wikimedia.org/wikipedia/commons/d/db/Kansai_Airport_Limited_Express_HARUKA%2C_Fukushima_-_panoramio.jpg" target="_blank" rel="noopener noreferrer" aria-label="JR HARUKA・旅程由呢度開始，開啟原相（新分頁）"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Kansai_Airport_Limited_Express_HARUKA%2C_Fukushima_-_panoramio.jpg/960px-Kansai_Airport_Limited_Express_HARUKA%2C_Fukushima_-_panoramio.jpg" alt="白色 HARUKA 關西機場特急列車" width="960" height="720" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="photo-unavailable">相片暫時未能載入<br>按此查看原相 ↗</span></a>
+        <figcaption><span>JR HARUKA・旅程由呢度開始</span><a href="https://commons.wikimedia.org/wiki/File:Kansai_Airport_Limited_Express_HARUKA%2C_Fukushima_-_panoramio.jpg" target="_blank" rel="noopener noreferrer" aria-label="JR HARUKA・旅程由呢度開始，相片來源及授權（新分頁）">來源 ↗</a></figcaption>
+      </figure></div>
       <ol class="steps"><li><div class="step-time">16:25</div><div><b>抵達關西國際機場 KIX</b><p>入境、取行李；時間視乎當日情況。</p></div></li><li><div class="step-time">傍晚</div><div><b>JR HARUKA 前往新大阪</b><p>車程約 50 分鐘，酒店 Check-in。</p></div></li><li><div class="step-time">晚上</div><div><b>大阪食晚飯</b><p>以簡單晚餐為主，早啲休息，第二日要搭長途車。</p></div></li></ol>
       <div class="day-bottom"><div><span>今晚住宿</span><strong>新大阪站附近</strong></div></div>
       <div class="day-tip"><span class="tip-star">✳</span><span>第一晚住新大阪最方便：第二朝可直接搭新幹線往名古屋。</span></div>
@@ -117,6 +147,10 @@ main{padding-bottom:72px}.section{padding-top:80px}.section-title{display:flex;g
 <article class="day-card" data-tags="snow culture" id="day-2" aria-label="第2日 1月16日">
       <div class="day-card-top"><div class="date-stack"><span class="day-count">DAY 02</span><span class="date-label">1月16日 <small>2027・星期六</small></span></div><span class="kind">🚆 移動 + 古街</span></div>
       <div class="day-card-main"><h3>穿過日本中部・抵達飛驒高山</h3><p class="where">高山</p></div>
+      <div class="day-gallery" aria-label="當日景點相片"><figure class="day-photo">
+        <a class="day-photo-link" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Quartier_Sanmachi_Takayama.jpg" target="_blank" rel="noopener noreferrer" aria-label="三町古街・木造老街散步，開啟原相（新分頁）"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Quartier_Sanmachi_Takayama.jpg/960px-Quartier_Sanmachi_Takayama.jpg" alt="高山三町古街兩旁的傳統木造商家" width="960" height="720" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="photo-unavailable">相片暫時未能載入<br>按此查看原相 ↗</span></a>
+        <figcaption><span>三町古街・木造老街散步</span><a href="https://commons.wikimedia.org/wiki/File:Quartier_Sanmachi_Takayama.jpg" target="_blank" rel="noopener noreferrer" aria-label="三町古街・木造老街散步，相片來源及授權（新分頁）">來源 ↗</a></figcaption>
+      </figure></div>
       <ol class="steps"><li><div class="step-time">上午</div><div><b>新大阪 → 名古屋 → 高山</b><p>東海道新幹線轉 JR 特急 Hida，全程預留約 3.5–4 小時。</p></div></li><li><div class="step-time">下午</div><div><b>三町古街與高山老街</b><p>木造商家街、清酒釀造店、飛驒牛小食。</p></div></li><li><div class="step-time">晚上</div><div><b>高山晚餐</b><p>試飛驒牛、朴葉味噌；早啲返酒店休息。</p></div></li></ol>
       <div class="day-bottom"><div><span>今晚住宿</span><strong>高山站／濃飛巴士中心附近</strong></div></div>
       <div class="day-tip"><span class="tip-star">✳</span><span>建議連住兩晚高山站附近，方便 1/17 點燈團出發及返程。</span></div>
@@ -124,6 +158,14 @@ main{padding-bottom:72px}.section{padding-top:80px}.section-title{display:flex;g
 <article class="day-card" data-tags="snow highlight culture" id="day-3" aria-label="第3日 1月17日">
       <div class="day-card-top"><div class="date-stack"><span class="day-count">DAY 03</span><span class="date-label">1月17日 <small>2027・星期日</small></span></div><span class="kind">✨ 全程重點</span></div>
       <div class="day-card-main"><h3>日枝神社雪景・白川鄉夜間點燈</h3><p class="where">高山・日枝神社 ↔ 白川鄉</p></div>
+      <div class="day-gallery day-gallery-pair" aria-label="當日景點相片"><figure class="day-photo">
+        <a class="day-photo-link" href="https://upload.wikimedia.org/wikipedia/commons/a/a5/Shirakawa_Go_At_Night_%28198621599%29.jpeg" target="_blank" rel="noopener noreferrer" aria-label="白川鄉・合掌村夜景，開啟原相（新分頁）"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Shirakawa_Go_At_Night_%28198621599%29.jpeg/960px-Shirakawa_Go_At_Night_%28198621599%29.jpeg" alt="從展望台俯瞰白川鄉雪中合掌村的燈火" width="960" height="640" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="photo-unavailable">相片暫時未能載入<br>按此查看原相 ↗</span></a>
+        <figcaption><span>白川鄉・合掌村夜景</span><a href="https://commons.wikimedia.org/wiki/File:Shirakawa_Go_At_Night_%28198621599%29.jpeg" target="_blank" rel="noopener noreferrer" aria-label="白川鄉・合掌村夜景，相片來源及授權（新分頁）">來源 ↗</a></figcaption>
+      </figure>
+      <figure class="day-photo">
+        <a class="day-photo-link" href="https://upload.wikimedia.org/wikipedia/commons/8/81/Takayama_Hie_Shrine_Haiden_with_Snow.jpg" target="_blank" rel="noopener noreferrer" aria-label="日枝神社・雪中社殿，開啟原相（新分頁）"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Takayama_Hie_Shrine_Haiden_with_Snow.jpg/960px-Takayama_Hie_Shrine_Haiden_with_Snow.jpg" alt="高山日枝神社冬季雪中的拜殿" width="960" height="720" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="photo-unavailable">相片暫時未能載入<br>按此查看原相 ↗</span></a>
+        <figcaption><span>日枝神社・雪中社殿</span><a href="https://commons.wikimedia.org/wiki/File:Takayama_Hie_Shrine_Haiden_with_Snow.jpg" target="_blank" rel="noopener noreferrer" aria-label="日枝神社・雪中社殿，相片來源及授權（新分頁）">來源 ↗</a></figcaption>
+      </figure></div>
       <ol class="steps"><li><div class="step-time">08:30–09:15</div><div><b>宮川朝市・早餐</b><p>慢慢行朝市，之後步行前往日枝神社。</p></div></li><li><div class="step-time">09:45–10:45</div><div><b>飛驒山王宮・日枝神社 ⛩</b><p>參拜、影杉樹林同朱紅色社殿；如有積雪，留意石階同山路濕滑。朝市至神社預留約 30 分鐘步行。</p></div></li><li><div class="step-time">11:00–13:30</div><div><b>高山古街・飛驒牛午餐</b><p>影古街、食午餐，之後返回高山站一帶。</p></div></li><li><div class="step-time">14:20–14:40</div><div><b>到高山濃飛巴士中心集合</b><p>預留時間換領點燈團車票及準備上車，以預訂確認文件嘅集合時間為準。</p></div></li><li><div class="step-time">15:10</div><div><b>從高山濃飛巴士中心出發</b><p>預訂「含展望台」的白川鄉點燈團 B。</p></div></li><li><div class="step-time">16:20–19:45</div><div><b>白川鄉觀光＋17:30–19:30 點燈</b><p>包含荻町城跡展望台入場；前往展望台需雪路步行。</p></div></li><li><div class="step-time">20:45</div><div><b>返回高山</b><p>晚上氣溫低，預備暖包、防滑鞋同保暖外套。</p></div></li></ol>
       <div class="day-bottom"><div><span>今晚住宿</span><strong>高山站附近（第二晚）</strong></div></div>
       <div class="day-tip"><span class="tip-star">✳</span><span>一定要預約！2026/10/19 香港時間 13:00 開賣；未買到票就改為普通白川鄉日遊，唔好假設現場可以入場。</span></div>
@@ -131,6 +173,10 @@ main{padding-bottom:72px}.section{padding-top:80px}.section-title{display:flex;g
 <article class="day-card" data-tags="snow nature" id="day-4" aria-label="第4日 1月18日">
       <div class="day-card-top"><div class="date-stack"><span class="day-count">DAY 04</span><span class="date-label">1月18日 <small>2027・星期一</small></span></div><span class="kind">🚡 雪山 + 溫泉</span></div>
       <div class="day-card-main"><h3>北阿爾卑斯雪山・新穗高纜車</h3><p class="where">新穗高／奧飛驒</p></div>
+      <div class="day-gallery" aria-label="當日景點相片"><figure class="day-photo">
+        <a class="day-photo-link" href="https://upload.wikimedia.org/wikipedia/commons/c/c2/Shinhotaka_ropeway01s3200.jpg" target="_blank" rel="noopener noreferrer" aria-label="新穗高纜車・走進雪山，開啟原相（新分頁）"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Shinhotaka_ropeway01s3200.jpg/960px-Shinhotaka_ropeway01s3200.jpg" alt="新穗高纜車穿過積雪覆蓋的山林" width="960" height="643" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="photo-unavailable">相片暫時未能載入<br>按此查看原相 ↗</span></a>
+        <figcaption><span>新穗高纜車・走進雪山</span><a href="https://commons.wikimedia.org/wiki/File:Shinhotaka_ropeway01s3200.jpg" target="_blank" rel="noopener noreferrer" aria-label="新穗高纜車・走進雪山，相片來源及授權（新分頁）">來源 ↗</a></figcaption>
+      </figure></div>
       <ol class="steps"><li><div class="step-time">上午</div><div><b>高山 → 平湯溫泉</b><p>巴士約 1 小時；可先向旅館確認寄存行李。</p></div></li><li><div class="step-time">中午–下午</div><div><b>平湯 → 新穗高纜車</b><p>巴士約 40–50 分鐘；坐纜車欣賞日本阿爾卑斯雪景。</p></div></li><li><div class="step-time">傍晚</div><div><b>返回平湯溫泉</b><p>入住溫泉旅館、浸露天風呂。</p></div></li><li><div class="step-time">晚上</div><div><b>旅館會席晚餐</b><p>建議揀有飛驒牛、戶外溫泉嘅住宿。</p></div></li></ol>
       <div class="day-bottom"><div><span>今晚住宿</span><strong>平湯溫泉旅館（包早晚餐佳）</strong></div></div>
       <div class="day-tip"><span class="tip-star">✳</span><span>纜車可能因強風／維修停駛。遇上停駛就改為溫泉街散步、提早入旅館。</span></div>
@@ -138,6 +184,10 @@ main{padding-bottom:72px}.section{padding-top:80px}.section-title{display:flex;g
 <article class="day-card" data-tags="snow culture" id="day-5" aria-label="第5日 1月19日">
       <div class="day-card-top"><div class="date-stack"><span class="day-count">DAY 05</span><span class="date-label">1月19日 <small>2027・星期二</small></span></div><span class="kind">🏡 雪村 + 移動</span></div>
       <div class="day-card-main"><h3>白川鄉日間雪景・轉往金澤</h3><p class="where">白川鄉 → 金澤</p></div>
+      <div class="day-gallery" aria-label="當日景點相片"><figure class="day-photo">
+        <a class="day-photo-link" href="https://upload.wikimedia.org/wikipedia/commons/6/63/Shirakawa-go_002.jpg" target="_blank" rel="noopener noreferrer" aria-label="白川鄉・日間合掌屋雪景，開啟原相（新分頁）"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Shirakawa-go_002.jpg/960px-Shirakawa-go_002.jpg" alt="日光下被白雪覆蓋的白川鄉荻町合掌村" width="960" height="639" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="photo-unavailable">相片暫時未能載入<br>按此查看原相 ↗</span></a>
+        <figcaption><span>白川鄉・日間合掌屋雪景</span><a href="https://commons.wikimedia.org/wiki/File:Shirakawa-go_002.jpg" target="_blank" rel="noopener noreferrer" aria-label="白川鄉・日間合掌屋雪景，相片來源及授權（新分頁）">來源 ↗</a></figcaption>
+      </figure></div>
       <ol class="steps"><li><div class="step-time">早上</div><div><b>平湯 → 高山巴士中心</b><p>巴士約 1 小時，需預留轉車緩衝。</p></div></li><li><div class="step-time">上午–下午</div><div><b>高山 → 白川鄉</b><p>高速巴士約 50–60 分鐘；預留 2–3 小時影日間合掌屋雪景。</p></div></li><li><div class="step-time">下午</div><div><b>白川鄉 → 金澤</b><p>高速巴士約 1 小時 15 分鐘，需提前確認及預訂班次。</p></div></li><li><div class="step-time">晚上</div><div><b>金澤海鮮晚餐</b><p>抵達後以休息為主。</p></div></li></ol>
       <div class="day-bottom"><div><span>今晚住宿</span><strong>金澤站附近</strong></div></div>
       <div class="day-tip"><span class="tip-star">✳</span><span>呢日轉車最多。若 1/17 已玩夠白川鄉，或遇到大雪延誤，可改乘合適交通直接去金澤，唔去第二次。</span></div>
@@ -145,6 +195,14 @@ main{padding-bottom:72px}.section{padding-top:80px}.section-title{display:flex;g
 <article class="day-card" data-tags="snow culture" id="day-6" aria-label="第6日 1月20日">
       <div class="day-card-top"><div class="date-stack"><span class="day-count">DAY 06</span><span class="date-label">1月20日 <small>2027・星期三</small></span></div><span class="kind">🌲 庭園 + 茶屋</span></div>
       <div class="day-card-main"><h3>金澤・雪中日式庭園</h3><p class="where">金澤</p></div>
+      <div class="day-gallery day-gallery-pair" aria-label="當日景點相片"><figure class="day-photo">
+        <a class="day-photo-link" href="https://upload.wikimedia.org/wikipedia/commons/d/d5/Kenroku-en-winter-lantern.jpg" target="_blank" rel="noopener noreferrer" aria-label="兼六園・雪吊與石燈籠，開啟原相（新分頁）"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Kenroku-en-winter-lantern.jpg/960px-Kenroku-en-winter-lantern.jpg" alt="兼六園冬季庭園中的積雪與石燈籠" width="960" height="640" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="photo-unavailable">相片暫時未能載入<br>按此查看原相 ↗</span></a>
+        <figcaption><span>兼六園・雪吊與石燈籠</span><a href="https://commons.wikimedia.org/wiki/File:Kenroku-en-winter-lantern.jpg" target="_blank" rel="noopener noreferrer" aria-label="兼六園・雪吊與石燈籠，相片來源及授權（新分頁）">來源 ↗</a></figcaption>
+      </figure>
+      <figure class="day-photo">
+        <a class="day-photo-link" href="https://upload.wikimedia.org/wikipedia/commons/e/e2/Higashi_Chaya_District_%2850154603457%29.jpg" target="_blank" rel="noopener noreferrer" aria-label="東茶屋街・午後慢遊，開啟原相（新分頁）"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Higashi_Chaya_District_%2850154603457%29.jpg/960px-Higashi_Chaya_District_%2850154603457%29.jpg" alt="金澤東茶屋街的傳統木造茶屋建築" width="960" height="640" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="photo-unavailable">相片暫時未能載入<br>按此查看原相 ↗</span></a>
+        <figcaption><span>東茶屋街・午後慢遊</span><a href="https://commons.wikimedia.org/wiki/File:Higashi_Chaya_District_%2850154603457%29.jpg" target="_blank" rel="noopener noreferrer" aria-label="東茶屋街・午後慢遊，相片來源及授權（新分頁）">來源 ↗</a></figcaption>
+      </figure></div>
       <ol class="steps"><li><div class="step-time">早上</div><div><b>兼六園</b><p>冬季雪吊松樹係經典畫面；積雪程度視天氣。</p></div></li><li><div class="step-time">中午</div><div><b>金澤城公園、近江町市場</b><p>食海鮮丼、蟹或壽司。</p></div></li><li><div class="step-time">下午</div><div><b>東茶屋街</b><p>傳統建築、茶屋、金箔甜品。</p></div></li><li><div class="step-time">晚上</div><div><b>金澤夜景與居酒屋</b><p>靈活安排，不要太趕。</p></div></li></ol>
       <div class="day-bottom"><div><span>今晚住宿</span><strong>金澤站附近（第二晚）</strong></div></div>
       <div class="day-tip"><span class="tip-star">✳</span><span>如果有新雪，先去兼六園；庭園雪景好睇程度相當受當日天氣影響。</span></div>
@@ -152,6 +210,10 @@ main{padding-bottom:72px}.section{padding-top:80px}.section-title{display:flex;g
 <article class="day-card" data-tags="culture city" id="day-7" aria-label="第7日 1月21日">
       <div class="day-card-top"><div class="date-stack"><span class="day-count">DAY 07</span><span class="date-label">1月21日 <small>2027・星期四</small></span></div><span class="kind">🚄 回大阪</span></div>
       <div class="day-card-main"><h3>金澤慢遊・返回大阪</h3><p class="where">金澤 → 大阪</p></div>
+      <div class="day-gallery" aria-label="當日景點相片"><figure class="day-photo">
+        <a class="day-photo-link" href="https://upload.wikimedia.org/wikipedia/commons/3/36/Dotonbori_at_night.JPG" target="_blank" rel="noopener noreferrer" aria-label="道頓堀・返到大阪嘅夜晚，開啟原相（新分頁）"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Dotonbori_at_night.JPG/960px-Dotonbori_at_night.JPG" alt="大阪道頓堀河畔亮起的霓虹招牌" width="960" height="643" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="photo-unavailable">相片暫時未能載入<br>按此查看原相 ↗</span></a>
+        <figcaption><span>道頓堀・返到大阪嘅夜晚</span><a href="https://commons.wikimedia.org/wiki/File:Dotonbori_at_night.JPG" target="_blank" rel="noopener noreferrer" aria-label="道頓堀・返到大阪嘅夜晚，相片來源及授權（新分頁）">來源 ↗</a></figcaption>
+      </figure></div>
       <ol class="steps"><li><div class="step-time">上午</div><div><b>金澤咖啡／最後觀光</b><p>補買伴手禮，視天氣可調整。</p></div></li><li><div class="step-time">中午–下午</div><div><b>金澤 → 敦賀 → 大阪</b><p>北陸新幹線於敦賀轉 Thunderbird，約 2.5–3 小時含轉乘。</p></div></li><li><div class="step-time">傍晚</div><div><b>難波酒店 Check-in</b><p>可去道頓堀晚餐，逛心齋橋。</p></div></li></ol>
       <div class="day-bottom"><div><span>今晚住宿</span><strong>大阪難波附近</strong></div></div>
       <div class="day-tip"><span class="tip-star">✳</span><span>由金澤返大阪必須喺敦賀轉車；買車票時留意完整轉乘行程。</span></div>
@@ -159,6 +221,10 @@ main{padding-bottom:72px}.section{padding-top:80px}.section-title{display:flex;g
 <article class="day-card" data-tags="city" id="day-8" aria-label="第8日 1月22日">
       <div class="day-card-top"><div class="date-stack"><span class="day-count">DAY 08</span><span class="date-label">1月22日 <small>2027・星期五</small></span></div><span class="kind">🍜 城市休息日</span></div>
       <div class="day-card-main"><h3>大阪・購物與美食自由日</h3><p class="where">大阪</p></div>
+      <div class="day-gallery" aria-label="當日景點相片"><figure class="day-photo">
+        <a class="day-photo-link" href="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kuromon_Ichiba_Osaka.jpg" target="_blank" rel="noopener noreferrer" aria-label="黑門市場・一路行一路食，開啟原相（新分頁）"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Kuromon_Ichiba_Osaka.jpg" alt="大阪黑門市場有蓋商店街與攤檔" width="604" height="453" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="photo-unavailable">相片暫時未能載入<br>按此查看原相 ↗</span></a>
+        <figcaption><span>黑門市場・一路行一路食</span><a href="https://commons.wikimedia.org/wiki/File:Kuromon_Ichiba_Osaka.jpg" target="_blank" rel="noopener noreferrer" aria-label="黑門市場・一路行一路食，相片來源及授權（新分頁）">來源 ↗</a></figcaption>
+      </figure></div>
       <ol class="steps"><li><div class="step-time">上午</div><div><b>黑門市場／日本橋</b><p>早餐與街頭美食。</p></div></li><li><div class="step-time">下午</div><div><b>心齋橋／難波</b><p>購物、咖啡店，自由選擇。</p></div></li><li><div class="step-time">晚上</div><div><b>道頓堀</b><p>章魚燒、大阪燒、串炸；留時間整理行李。</p></div></li></ol>
       <div class="day-bottom"><div><span>今晚住宿</span><strong>大阪難波附近（第二晚）</strong></div></div>
       <div class="day-tip"><span class="tip-star">✳</span><span>如果想加其他大阪景點，可以將呢日換成大阪城或環球影城，但後者需要一整日。</span></div>
@@ -166,16 +232,29 @@ main{padding-bottom:72px}.section{padding-top:80px}.section-title{display:flex;g
 <article class="day-card" data-tags="city" id="day-9" aria-label="第9日 1月23日">
       <div class="day-card-top"><div class="date-stack"><span class="day-count">DAY 09</span><span class="date-label">1月23日 <small>2027・星期六</small></span></div><span class="kind">🛫 回程日</span></div>
       <div class="day-card-main"><h3>大阪最後半日・晚上回程</h3><p class="where">大阪 → KIX</p></div>
+      <div class="day-gallery" aria-label="當日景點相片"><figure class="day-photo">
+        <a class="day-photo-link" href="https://upload.wikimedia.org/wikipedia/commons/0/08/Kansai_International_Airport_Terminal.JPG" target="_blank" rel="noopener noreferrer" aria-label="關西機場・帶住回憶返屋企，開啟原相（新分頁）"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Kansai_International_Airport_Terminal.JPG/960px-Kansai_International_Airport_Terminal.JPG" alt="關西國際機場客運大樓的弧形屋頂與室內空間" width="960" height="720" loading="lazy" decoding="async" referrerpolicy="no-referrer"><span class="photo-unavailable">相片暫時未能載入<br>按此查看原相 ↗</span></a>
+        <figcaption><span>關西機場・帶住回憶返屋企</span><a href="https://commons.wikimedia.org/wiki/File:Kansai_International_Airport_Terminal.JPG" target="_blank" rel="noopener noreferrer" aria-label="關西機場・帶住回憶返屋企，相片來源及授權（新分頁）">來源 ↗</a></figcaption>
+      </figure></div>
       <ol class="steps"><li><div class="step-time">上午</div><div><b>退房、酒店寄存行李</b><p>最後購物／食午餐。</p></div></li><li><div class="step-time">下午</div><div><b>難波自由活動</b><p>留足時間取行李與行去車站。</p></div></li><li><div class="step-time">約 16:30–17:00</div><div><b>離開難波前往關西機場</b><p>視乎交通與航司要求調整，目標約 18:00 到機場。</p></div></li><li><div class="step-time">21:00</div><div><b>KIX 起飛</b><p>以機票上的 check-in 截止時間為準。</p></div></li></ol>
       <div class="day-bottom"><div><span>今晚住宿</span><strong>機上</strong></div></div>
       <div class="day-tip"><span class="tip-star">✳</span><span>傍晚去 KIX 就可以，唔使犧牲成日；但要預留冬季交通延誤緩衝。</span></div>
-    </article></div></section>
+    </article></div>
+<p class="photo-note">景點實景參考相片，拍攝季節及雪況未必與出發當日相同；相片需連網載入，按相片可開啟原相。</p>
+<details class="photo-credits"><summary>相片來源與授權 · 11 張</summary><ul><li><span>DAY 01</span><div><a href="https://commons.wikimedia.org/wiki/File:Kansai_Airport_Limited_Express_HARUKA%2C_Fukushima_-_panoramio.jpg" target="_blank" rel="noopener noreferrer">JR HARUKA・旅程由呢度開始</a> — DVMG · <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a></div></li><li><span>DAY 02</span><div><a href="https://commons.wikimedia.org/wiki/File:Quartier_Sanmachi_Takayama.jpg" target="_blank" rel="noopener noreferrer">三町古街・木造老街散步</a> — Bernard Gagnon · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></div></li><li><span>DAY 03</span><div><a href="https://commons.wikimedia.org/wiki/File:Shirakawa_Go_At_Night_%28198621599%29.jpeg" target="_blank" rel="noopener noreferrer">白川鄉・合掌村夜景</a> — Yoshiyuki Ito · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></div></li><li><span>DAY 03</span><div><a href="https://commons.wikimedia.org/wiki/File:Takayama_Hie_Shrine_Haiden_with_Snow.jpg" target="_blank" rel="noopener noreferrer">日枝神社・雪中社殿</a> — Miyuki Meinaka · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></div></li><li><span>DAY 04</span><div><a href="https://commons.wikimedia.org/wiki/File:Shinhotaka_ropeway01s3200.jpg" target="_blank" rel="noopener noreferrer">新穗高纜車・走進雪山</a> — 663highland · <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noopener noreferrer">CC BY 2.5</a></div></li><li><span>DAY 05</span><div><a href="https://commons.wikimedia.org/wiki/File:Shirakawa-go_002.jpg" target="_blank" rel="noopener noreferrer">白川鄉・日間合掌屋雪景</a> — tsuda · <a href="https://creativecommons.org/licenses/by-sa/2.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 2.0</a></div></li><li><span>DAY 06</span><div><a href="https://commons.wikimedia.org/wiki/File:Kenroku-en-winter-lantern.jpg" target="_blank" rel="noopener noreferrer">兼六園・雪吊與石燈籠</a> — tab2_dawa · <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a></div></li><li><span>DAY 06</span><div><a href="https://commons.wikimedia.org/wiki/File:Higashi_Chaya_District_%2850154603457%29.jpg" target="_blank" rel="noopener noreferrer">東茶屋街・午後慢遊</a> — Raita Futo · <a href="https://creativecommons.org/licenses/by/2.0/" target="_blank" rel="noopener noreferrer">CC BY 2.0</a></div></li><li><span>DAY 07</span><div><a href="https://commons.wikimedia.org/wiki/File:Dotonbori_at_night.JPG" target="_blank" rel="noopener noreferrer">道頓堀・返到大阪嘅夜晚</a> — Cristian O. Arone · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></div></li><li><span>DAY 08</span><div><a href="https://commons.wikimedia.org/wiki/File:Kuromon_Ichiba_Osaka.jpg" target="_blank" rel="noopener noreferrer">黑門市場・一路行一路食</a> — OsianLlwyd1 · Public domain</div></li><li><span>DAY 09</span><div><a href="https://commons.wikimedia.org/wiki/File:Kansai_International_Airport_Terminal.JPG" target="_blank" rel="noopener noreferrer">關西機場・帶住回憶返屋企</a> — Whity / Kirakirameister · <a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></div></li></ul><p>相片來自 Wikimedia Commons；僅於版面縮放及裁切顯示，原相可由來源連結查看，授權依各相片標示。</p></details>
+</section>
 <section class="section" id="transport"><div class="section-title"><div><span class="eyebrow muted">04 / GETTING AROUND</span><h2>交通、風險同住宿安排。</h2></div><p>雪季以公共交通為主，主要景點唔需要自駕；尤其白川鄉點燈須有預約，租車唔可以代替活動入場資格。</p></div><div class="details-grid"><div class="info-panel"><h3>主要交通段落</h3><table class="transport-table"><thead><tr><th>路線</th><th>方法</th><th>參考時間</th></tr></thead><tbody><tr><td>KIX → 新大阪</td><td>JR HARUKA</td><td>約 50 分鐘</td></tr><tr><td>新大阪 → 高山</td><td>新幹線經名古屋 + JR Hida</td><td>約 3.5–4 小時</td></tr><tr><td>高山 → 白川鄉</td><td>濃飛高速巴士</td><td>約 50–60 分鐘</td></tr><tr><td>高山 → 平湯</td><td>濃飛巴士</td><td>約 1 小時</td></tr><tr><td>平湯 → 新穗高</td><td>濃飛巴士</td><td>約 40–50 分鐘</td></tr><tr><td>白川鄉 → 金澤</td><td>高速巴士</td><td>約 1 小時 15 分鐘</td></tr><tr><td>金澤 → 大阪</td><td>新幹線 + Thunderbird（敦賀轉）</td><td>約 2.5–3 小時</td></tr></tbody></table><div class="mode-card"><b>自駕 vs 公共交通：</b>冬季高山、奧飛驒山路可能有積雪同結冰。除非有雪地駕駛經驗並租到合適冬季輪胎，否則推薦 JR＋巴士。上面時間未計候車、道路擠塞及天氣延誤。</div></div><div class="info-panel"><h3>出發前 Checklist <span id="checkCount" class="muted" style="font-size:12px;font-weight:500"></span></h3><div class="checks"><label class="check-item"><input type="checkbox" data-check="lightup"><span><b>搶訂 1/17 白川鄉點燈團</b><small>2026/10/19 香港時間 13:00 開賣；優先 Course B 含展望台。</small></span></label><label class="check-item"><input type="checkbox" data-check="hotel-takayama"><span><b>訂高山 1/16–17 兩晚</b><small>近高山站／濃飛巴士中心，晚上返程最方便。</small></span></label><label class="check-item"><input type="checkbox" data-check="hotel-onsen"><span><b>訂平湯溫泉 1/18</b><small>最好包早晚餐、有露天風呂，並確認行李寄存。</small></span></label><label class="check-item"><input type="checkbox" data-check="bus"><span><b>訂高山 → 白川鄉 → 金澤巴士</b><small>尤其 1/19 轉車日；確定班次與行李安排。</small></span></label><label class="check-item"><input type="checkbox" data-check="rail"><span><b>安排 JR 火車及其餘酒店</b><small>1/15 新大阪；1/19–20 金澤；1/21–22 大阪。</small></span></label><label class="check-item"><input type="checkbox" data-check="weather"><span><b>出發前查雪況與纜車營運</b><small>留意新穗高強風停駛、山區大雪與巴士延誤。</small></span></label></div><div class="check-progress"><div id="checkBar"></div></div><div id="checkProgress" class="progress-text">已完成 0 / 6 項</div><p class="note-sm">✓ 勾選進度只儲存於你開啟呢個 HTML 嘅瀏覽器，並不代表已經成功預約。</p></div></div></section>
 <section class="section"><div class="section-title"><div><span class="eyebrow muted">05 / BUDGET & PLAN B</span><h2>費用參考與雪天備案。</h2></div></div><div class="budget-grid"><div class="budget-card"><div class="eyebrow" style="color:#a6ceda">ROUGH BUDGET / PERSON</div><div class="number">HK$7,600–11,800</div><p>以兩人共用一間房計，粗略包含 8 晚住宿、火車及巴士、餐飲、點燈團同一般景點費用；<b>不包括機票與購物</b>。實際酒店價格、匯率及車費可能令預算明顯改變。</p><small>僅作初步規劃，並非即時報價。</small></div><div class="alert-card"><h3>🌨 大雪／天氣唔理想點算？</h3><ul><li><b>1/17 點燈搶唔到：</b>改為高山全日遊，並保留 1/19 白川鄉日景。</li><li><b>1/18 纜車停駛：</b>去平湯溫泉街放鬆，提早入住旅館。</li><li><b>1/19 巴士嚴重延誤：</b>跳過第二次白川鄉，優先安全抵達金澤。</li><li><b>1/23 回程日：</b>建議約 18:00 到 KIX，按航空公司要求預留辦登機時間。</li></ul></div></div></section>
 </main>
 <footer class="footer"><div class="container"><div class="footer-content"><div><b style="color:#274d60">SNOW ROUTE / 2027</b><div>大阪・高山・白川鄉・奧飛驒・金澤・大阪</div></div><div>行程資料整理日期：2026年10月18日　·　所有班次、價格及活動以官方最新公告為準。</div></div><div class="sources"><span>官方資料：</span><a href="https://www.nouhibus.co.jp/shirakawa_lightup_2027en/" target="_blank" rel="noopener noreferrer">白川鄉點燈團</a><a href="https://www.nouhibus.co.jp/route_bus/shinhotaka-line-en/" target="_blank" rel="noopener noreferrer">濃飛巴士・新穗高線</a><a href="https://shinhotaka-ropeway.jp/en/" target="_blank" rel="noopener noreferrer">新穗高纜車</a><a href="https://www.westjr.co.jp/travel-information/en/tickets-passes/route-search/" target="_blank" rel="noopener noreferrer">JR 西日本車票</a></div></div></footer>
 <script>
 (function(){
+  const dayPhotos=[...document.querySelectorAll('.day-photo img')];
+  dayPhotos.forEach(img=>{
+    const unavailable=()=>{img.hidden=true;img.closest('.day-photo-link').classList.add('is-unavailable')};
+    img.addEventListener('error',unavailable,{once:true});
+    if(img.complete&&img.naturalWidth===0)unavailable();
+  });
   const printBtn=document.getElementById('printBtn');
   printBtn.addEventListener('click',()=>window.print());
   const filters=[...document.querySelectorAll('.filter-btn')];
@@ -197,7 +276,7 @@ main{padding-bottom:72px}.section{padding-top:80px}.section-title{display:flex;g
   };
   checks.forEach(x=>{x.checked=!!saved[x.dataset.check];x.addEventListener('change',()=>{saved[x.dataset.check]=x.checked;try{localStorage.setItem('snowroute2027-checks',JSON.stringify(saved))}catch(e){}update()})});
   update();
-  window.addEventListener('beforeprint',()=>{days.forEach(el=>el.hidden=false)});
+  window.addEventListener('beforeprint',()=>{days.forEach(el=>el.hidden=false);dayPhotos.forEach(img=>img.loading='eager')});
   window.addEventListener('afterprint',()=>{const active=filters.find(b=>b.getAttribute('aria-pressed')==='true')?.dataset.filter||'all';days.forEach(el=>el.hidden=active!=='all'&&!el.dataset.tags.split(' ').includes(active))});
 })();
 </script>
