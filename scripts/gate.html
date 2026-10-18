@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#fff3f7">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>私人旅程 · SNOW ROUTE</title>
+<style>
+:root{color-scheme:light;font-family:"PingFang TC","Microsoft JhengHei",system-ui,sans-serif;color:#623c50;background:#fff6f9}*{box-sizing:border-box}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:28px 20px;background:radial-gradient(ellipse at 15% 15%,#f8dce8,transparent 55%),radial-gradient(ellipse at 90% 90%,#fce5de,transparent 50%),#fff6f9}.gate{width:min(100%,440px);text-align:center}.brand{font-size:10px;letter-spacing:.24em;font-weight:800;color:#aa6987}.bear-couple{display:block;width:min(220px,80%);height:auto;margin:16px auto 12px}.card{background:#fffdfd;border:1px solid #eed2df;border-radius:26px;padding:28px 30px 24px;box-shadow:0 20px 65px #a44b7520}.eyebrow{font-size:10px;letter-spacing:.18em;color:#a76785;margin:0 0 10px;font-weight:750}h1{font-size:29px;font-weight:800;line-height:1.4;letter-spacing:-.04em;margin:0 0 10px}.intro{font-size:13px;color:#926e82;line-height:1.8;margin:0 0 24px}form{text-align:left}label{font-size:12px;font-weight:750;display:block;margin:0 0 8px}.field{display:flex;background:#fff8fb;border:1px solid #e8c9d8;border-radius:12px;overflow:hidden}.field:focus-within{outline:3px solid #eaa8c355;outline-offset:3px;border-color:#b95d86}input{width:100%;min-width:0;padding:14px;border:0;background:transparent;color:#60364b;font:inherit;font-size:16px;outline:none}button{font:inherit;cursor:pointer}.reveal{background:transparent;border:0;padding:0 13px;color:#a3587b;font-size:12px;font-weight:700}.unlock{display:block;width:100%;border:0;border-radius:12px;padding:14px 16px;background:#ac507a;color:#fff;font-size:14px;font-weight:750;letter-spacing:.04em;margin-top:14px;transition:background .2s}.unlock:hover{background:#913c63}.unlock:disabled{cursor:wait;opacity:.7}button:focus-visible{outline:3px solid #d88aaa;outline-offset:3px}.error{min-height:22px;color:#a02d51;font-size:12px;line-height:1.6;margin:10px 0 0}.footnote{font-size:11px;color:#a17e90;margin:20px 0 0;line-height:1.8}noscript p{font-size:13px;color:#a02d51}@media(max-width:400px){.card{padding:24px 22px}.bear-couple{width:190px}h1{font-size:26px}}@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<main class="gate">
+  <div class="brand">SNOW ROUTE / OUR LITTLE JOURNEY</div>
+  <!-- CHARACTERS -->
+  <section class="card" aria-labelledby="gate-title">
+    <p class="eyebrow">一二 &amp; 布布 · 一齊出發</p>
+    <h1 id="gate-title">下一站，和你去旅行。</h1>
+    <p class="intro">輸入旅程密碼，開啟我哋嘅冬日行程。</p>
+    <form id="unlock-form">
+      <label for="password">旅程密碼</label>
+      <div class="field"><input id="password" type="password" autocomplete="current-password" placeholder="輸入密碼" required aria-describedby="unlock-error"><button class="reveal" id="reveal" type="button" aria-pressed="false" aria-controls="password">顯示</button></div>
+      <button class="unlock" id="unlock" type="submit">開啟旅程 →</button>
+      <p class="error" id="unlock-error" role="alert" aria-live="polite"></p>
+    </form>
+    <noscript><p>請啟用 JavaScript 以解鎖加密行程。</p></noscript>
+  </section>
+  <p class="footnote">只屬於我哋嘅旅行小本子 ♡<br>角色原作：黃小B · <a href="https://getstickerpack.com/stickers/xiao-xiong-yi-er-he-bu-bu-credits-to-huang-xiaob" target="_blank" rel="noopener noreferrer" style="color:inherit;text-underline-offset:3px">貼圖來源</a></p>
+</main>
+<script id="encrypted-itinerary" type="application/json">__ENCRYPTED_PAYLOAD__</script>
+<script>
+(() => {
+  const form = document.getElementById('unlock-form');
+  const input = document.getElementById('password');
+  const button = document.getElementById('unlock');
+  const error = document.getElementById('unlock-error');
+  const reveal = document.getElementById('reveal');
+  const decode = value => Uint8Array.from(atob(value), char => char.charCodeAt(0));
+  reveal.addEventListener('click', () => {
+    const showing = input.type === 'password';
+    input.type = showing ? 'text' : 'password';
+    reveal.textContent = showing ? '隱藏' : '顯示';
+    reveal.setAttribute('aria-pressed', String(showing));
+  });
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (button.disabled) return;
+    error.textContent = '';
+    input.removeAttribute('aria-invalid');
+    if (!globalThis.crypto?.subtle) {
+      error.textContent = '此瀏覽器未支援解密，請以新版瀏覽器透過 HTTPS 開啟。';
+      return;
+    }
+    button.disabled = true;
+    button.textContent = '開啟中…';
+    let html;
+    try {
+      const payload = JSON.parse(document.getElementById('encrypted-itinerary').textContent);
+      const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(input.value), 'PBKDF2', false, ['deriveKey']);
+      input.value = '';
+      const key = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: decode(payload.salt), iterations: payload.iterations, hash: 'SHA-256' }, material, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+      html = new TextDecoder().decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: decode(payload.iv) }, key, decode(payload.ciphertext)));
+    } catch {
+      error.textContent = '密碼唔啱，請再試一次。';
+      input.setAttribute('aria-invalid', 'true');
+      input.focus();
+      button.disabled = false;
+      button.textContent = '開啟旅程 →';
+      return;
+    }
+    document.open();
+    document.write(html);
+    document.close();
+    requestAnimationFrame(() => {
+      const target = document.getElementById(location.hash.slice(1));
+      if (target) target.scrollIntoView();
+    });
+  });
+})();
+</script>
+</body>
+</html>
