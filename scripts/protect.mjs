@@ -7,9 +7,10 @@ export const iterations = 600000;
 const root = new URL('../', import.meta.url);
 const encode = value => Buffer.from(value).toString('base64');
 
-export async function encrypt(html, password) {
+export async function encrypt(html, password, options = {}) {
   if (!password) throw new Error('A password is required.');
-  const salt = webcrypto.getRandomValues(new Uint8Array(16));
+  const salt = options.salt ? Uint8Array.from(options.salt) : webcrypto.getRandomValues(new Uint8Array(16));
+  if (salt.length !== 16) throw new Error('Salt must be 16 bytes.');
   const iv = webcrypto.getRandomValues(new Uint8Array(12));
   const material = await webcrypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
   const key = await webcrypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations, hash: 'SHA-256' }, material, { name: 'AES-GCM', length: 256 }, false, ['encrypt']);
@@ -17,11 +18,25 @@ export async function encrypt(html, password) {
   return { version: 1, iterations, salt: encode(salt), iv: encode(iv), ciphertext: encode(ciphertext) };
 }
 
+async function existingSalt() {
+  try {
+    const current = await readFile(new URL('index.html', root), 'utf8');
+    const match = current.match(/<script id="encrypted-itinerary" type="application\/json">([^<]+)<\/script>/);
+    if (!match) return null;
+    const salt = Buffer.from(JSON.parse(match[1]).salt, 'base64');
+    return salt.length === 16 ? salt : null;
+  } catch { return null; }
+}
+
 export async function build(password) {
   const source = await readFile(new URL('.private/itinerary.html', root), 'utf8');
   const bears = '<img class="bear-couple" src="assets/yier-bubu.png" width="512" height="512" alt="一二攬住布布的原角色貼圖" decoding="async">';
   const template = await readFile(new URL('scripts/gate.html', root), 'utf8');
-  const payload = await encrypt(source, password);
+  const salt = await existingSalt() ?? webcrypto.getRandomValues(new Uint8Array(16));
+  const activity = `<script src="scripts/session.js"></script><script>SnowRouteSession.startActivity(${JSON.stringify(encode(salt))});</script>`;
+  if (!/<\/body>/i.test(source)) throw new Error('Editable itinerary must contain a closing body tag.');
+  const protectedSource = source.replace(/<\/body>/i, `${activity}</body>`);
+  const payload = await encrypt(protectedSource, password, { salt });
   const output = template.replace('<!-- CHARACTERS -->', bears).replace('__ENCRYPTED_PAYLOAD__', JSON.stringify(payload));
   await writeFile(new URL('index.html', root), output);
   console.log('Encrypted index.html rebuilt. The password and editable source are not included in the published files.');

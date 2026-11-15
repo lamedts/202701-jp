@@ -14,7 +14,7 @@ In **Settings → Pages → Build and deployment**, select:
 
 Click **Save**. The expected URL is https://lamedts.github.io/202701-jp/ once GitHub finishes deploying.
 
-Only the encrypted `index.html` is published as the itinerary. `.nojekyll` enables ordinary static hosting.
+Only the encrypted `index.html` is published as the itinerary. `scripts/session.js` handles the browser session and contains no password or itinerary content. `.nojekyll` enables ordinary static hosting.
 
 ## Edit or change the website password
 
@@ -26,9 +26,9 @@ After editing it, rebuild with Node.js 22 or later:
 node scripts/protect.mjs
 ```
 
-Enter the website password at the hidden prompt. Commit and push the rebuilt `index.html`. The password itself is never saved in the repository. Refreshing the page locks it again; there is no persistent login.
+Enter the website password at the hidden prompt. Commit and push the rebuilt `index.html` and `scripts/session.js`. The password itself is never saved in the repository. A successful unlock stores a non-extractable decryption key in that browser's IndexedDB. Reopening or using the page within 3 days extends the session for another 3 days; after 3 idle days, the password is required again. Clearing browser storage or using another browser also requires the password. If IndexedDB is unavailable, the page still unlocks, but the session is not saved.
 
-The page uses PBKDF2-SHA-256 (600,000 iterations, random salt) and AES-256-GCM (random IV). Visitors decrypt the page in their browser. Choose a strong password: the published encrypted file can be downloaded and password guesses can be tested offline. The lock does not hide any unencrypted content already present in old Git commits. Public reference photographs remain public on their original hosts.
+The page uses PBKDF2-SHA-256 (600,000 iterations, a random site salt) and AES-256-GCM (a new random IV on every build). Rebuilds reuse the existing salt so an unexpired browser session survives content updates; changing the password invalidates the old key. Visitors decrypt the page in their browser. Choose a strong password: the published encrypted file can be downloaded and password guesses can be tested offline. The lock does not hide any unencrypted content already present in old Git commits. Public reference photographs remain public on their original hosts.
 
 Run the encryption and unlock-flow checks with:
 
